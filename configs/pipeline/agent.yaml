@@ -1,0 +1,90 @@
+tools:
+  - LOCALISE
+  - ATTENUATION
+  - HARMONISE
+  - TEXTURE
+  - STABILITYFILTER
+  - DENSITYESTIMATE
+  - GROUNDTOSTANDARD
+  - SCORE
+  - CONSTRAIN
+  - SERIALISE
+
+repair_order:
+  - id
+  - band
+  - tier
+  - sev
+  - ev
+
+constrain_budget: 6
+
+reference_arm: constrained
+reference_method: OSTEO-CT (constrained)
+
+comparison_arms:
+  - arm: hu_threshold_rule
+    method: Vertebral HU threshold rule
+    policy: unconstrained
+  - arm: convolutional
+    method: 3-D convolutional network
+    policy: unconstrained
+  - arm: shifted_window
+    method: 3-D shifted-window transformer
+    policy: unconstrained
+  - arm: foundation_encoder
+    method: Multimodal foundation encoder
+    policy: unconstrained
+  - arm: tool_free_scorer
+    method: Tool-free scorer (descriptors)
+    policy: unconstrained
+  - arm: constrained
+    method: Tool-using agent, no ontology layer
+    policy: unconstrained
+  - arm: constrained
+    method: OSTEO-CT (constrained)
+    policy: constrained
+
+substitution_arms:
+  - arm: text_only_planner
+    method: Text-only planner + operator
+    policy: constrained
+  - arm: tool_free_scorer
+    method: Tool-free scorer + operator
+    policy: constrained
+  - arm: constrained
+    method: Hard regulariser, same axioms
+    policy: regularised
+
+outcome_arms:
+  - arm: hu_threshold_rule
+    method: Vertebral HU threshold rule
+    policy: unconstrained
+  - arm: shifted_window
+    method: 3-D shifted-window transformer
+    policy: unconstrained
+  - arm: constrained
+    method: Tool-using agent, no ontology layer
+    policy: unconstrained
+  - arm: constrained
+    method: OSTEO-CT (constrained)
+    policy: constrained
+
+ablation_arms:
+  - arm: hu_threshold_rule
+    method: Vertebral HU threshold rule
+  - arm: convolutional
+    method: 3-D convolutional network
+  - arm: shifted_window
+    method: 3-D shifted-window transformer
+  - arm: foundation_encoder
+    method: Multimodal foundation encoder
+  - arm: tool_free_scorer
+    method: Tool-free scorer (descriptors)
+
+clinical_comparator_method: Tool-using agent, no ontology layer
+reference_fraX_method: FRAX, no BMD
+
+bootstrap_replicates: 2000
+reading_study_size: 400
+escalation_threshold: 0.50

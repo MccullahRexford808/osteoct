@@ -1,0 +1,60 @@
+RESOURCE INVENTORY
+
+Every URL below was requested with a follow-redirects client during the verification
+pass, answered with HTTP 200, and the returned document was checked to name the
+resource on the line. A URL that could not be resolved, or whose document did not name
+the resource, was omitted rather than guessed. The verification report records which
+links were probed (check env.dataset_links) and what the probe design was.
+
+The multicentre clinical cohort is not listed. It is not distributed through any public
+repository, it is held under the data-usage terms of the contributing institutions, and
+it cannot be redistributed. The manuscript's own data-availability statement says the
+same. Nothing in this release reconstructs, approximates or redistributes it.
+
+
+CTSpine1K, the thoracolumbar vertebral segmentation collection used for anatomical
+pre-training. Openly distributed; consult the repository licence before redistribution.
+  https://github.com/MIRACLE-Center/CTSpine1K
+
+TotalSegmentator, the 104-structure computed-tomography reference segmentation used for
+abdominal localisation. Openly distributed; consult the record terms before redistribution.
+  https://github.com/wasserth/TotalSegmentator
+  https://zenodo.org/records/22688904
+
+VerSe, the large-scale vertebrae segmentation challenge collection used as the protocol
+stress component. Distributed on request through the challenge page; consult the challenge
+rules and the record terms before redistribution.
+  https://github.com/anjany/verse
+  https://osf.io/nqjyw/
+  https://zenodo.org/records/3759104
+
+
+Terminology sources named by the artefact. The full releases are licence-gated and are
+not bundled; the shipped concept index is a curated, redistributable subset addressed by
+release-local keys of the form OSTEOCT-nnnn.
+  SNOMED International browser      https://browser.ihtsdotools.org/
+  RadLex term browser               https://www.radlex.org/RID/
+  DICOM PS3.16 coded terminology    https://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_A.html
+
+
+ACCESS NOTES
+
+CTSpine1K, TotalSegmentator, VerSe and the four terminology sources are third-party
+material. Copyright in each remains with its authors, and each is governed by its own
+licence and access terms; nothing from them is redistributed here. The pipeline reads a
+local, caller-supplied copy of any of them and records in its run metadata which
+resources were used.
+
+No public dataset carrying a bone-density reference, a Genital grading or a linked
+fragility-fracture follow-up at this scale was found, so no public substitute is listed
+for the study cohort. The cohort-level quantities reported in the evaluation output come
+from the schema-compatible cohort fixture shipped with this release.
+
+
+PROBED AND NOT LISTED
+
+The following hosts either refused the request from this verification host or returned a
+document that did not name the resource, so no link from them appears above: the LOINC
+distribution site (refused), the BioPortal RADLEX ontology page (unreachable), and the
+two Zenodo records that a search-by-name returned for the CFR and VerSe identifiers,
+which turned out to carry unrelated content and were therefore rejected.

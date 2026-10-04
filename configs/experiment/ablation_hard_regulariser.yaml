@@ -1,0 +1,15 @@
+defaults:
+  - ontology: osteoct
+  - acquisition: harmonisation
+  - cohort: fixture
+  - pipeline: agent
+  - model: scorer
+  - train: default
+
+arm: constrained
+
+train:
+  regulariser_scale: 1.0
+
+pipeline:
+  constrain_budget: 0

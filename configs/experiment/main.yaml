@@ -1,0 +1,21 @@
+defaults:
+  - ontology: osteoct
+  - acquisition: harmonisation
+  - cohort: fixture
+  - pipeline: agent
+  - model: scorer
+  - train: default
+
+evaluation:
+  pre_specified_conformance: 0.90
+  mcid_concordance: 0.030
+  utility_margin_points: 5.0
+  conformance_margin_points: 15.0
+  per_examination_budget_seconds: 5.0
+
+arm: constrained
+
+pipeline:
+  constrain_budget: 6
+  reference_arm: constrained
+  reference_method: OSTEO-CT (constrained)

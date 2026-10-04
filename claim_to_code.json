@@ -1,0 +1,733 @@
+{
+ "artifact": "paper-claim to code mapping",
+ "release": "Ontology-Guided Opportunistic CT Agent for Early Osteoporosis Prognosis Using Vertebral Attenuation, Trabecular Texture, and Fracture-Risk Semantics",
+ "venue": "IEEE Journal of Biomedical and Health Informatics",
+ "package_dir": "osteoct",
+ "anchor_convention": "code[].path is relative to package_dir; code[].symbol is a module-level name, or Class.member for a method",
+ "verification_vocabulary": {
+  "PASS": "the check ran on this host and held",
+  "FAIL": "the check ran on this host and did not hold",
+  "NOT_RUN": "the input the check needs is unavailable, which for a private cohort is expected and is never an invitation to substitute a number",
+  "BLOCKED": "an external resource or tool is required and is not present in this checkout"
+ },
+ "counts": {
+  "claims": 34,
+  "anchors": 78,
+  "resolved_anchors": 78,
+  "unresolved": []
+ },
+ "claims": [
+  {
+   "id": "sec3b-location-labels",
+   "paper_location": "Sec. III-B, first paragraph",
+   "claim": "Localisation presents the vertebrae of the spine with level labels and a per-vertebra region.",
+   "code": [
+    {
+     "path": "localisation/vertebra.py",
+     "symbol": "localise",
+     "resolved": true
+    },
+    {
+     "path": "localisation/vertebra.py",
+     "symbol": "assign_levels",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3b-trabecular-region",
+   "paper_location": "Sec. III-B, second paragraph",
+   "claim": "The region used for attenuation leaves out cortical bone and endplates and reports a mean and a spread.",
+   "code": [
+    {
+     "path": "acquisition/attenuation.py",
+     "symbol": "trabecular_mask",
+     "resolved": true
+    },
+    {
+     "path": "acquisition/attenuation.py",
+     "symbol": "sample_region",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3b-harmonisation-interval",
+   "paper_location": "Sec. III-B, second paragraph",
+   "claim": "A harmonisation step maps the raw value and the acquisition descriptor onto a standard value with an uncertainty half-width.",
+   "code": [
+    {
+     "path": "acquisition/harmonise.py",
+     "symbol": "harmonise",
+     "resolved": true
+    },
+    {
+     "path": "acquisition/harmonise.py",
+     "symbol": "HarmonisationModel",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3b-band-consistency",
+   "paper_location": "Sec. III-B, second paragraph",
+   "claim": "The band consistency principle uses the whole interval rather than a point estimate.",
+   "code": [
+    {
+     "path": "ontology/bands.py",
+     "symbol": "bands_from_interval",
+     "resolved": true
+    },
+    {
+     "path": "ontology/bands.py",
+     "symbol": "band_consistent",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3b-texture-families",
+   "paper_location": "Sec. III-B, third paragraph",
+   "claim": "Texture is captured with grey-level co-occurrence, run-length, wavelet energy and local binary pattern descriptors.",
+   "code": [
+    {
+     "path": "texture/glcm.py",
+     "symbol": "glcm_descriptors",
+     "resolved": true
+    },
+    {
+     "path": "texture/runlength.py",
+     "symbol": "runlength_descriptors",
+     "resolved": true
+    },
+    {
+     "path": "texture/wavelet.py",
+     "symbol": "wavelet_descriptors",
+     "resolved": true
+    },
+    {
+     "path": "texture/lbp.py",
+     "symbol": "lbp_descriptors",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3b-stability-filter",
+   "paper_location": "Sec. III-B, third paragraph",
+   "claim": "A stability filter keeps a descriptor only when its test-retest agreement exceeds a threshold.",
+   "code": [
+    {
+     "path": "texture/stability.py",
+     "symbol": "stability_filter",
+     "resolved": true
+    },
+    {
+     "path": "texture/stability.py",
+     "symbol": "icc_2_1",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3b-density-indicator",
+   "paper_location": "Sec. III-B, third paragraph",
+   "claim": "The volumetric density indicator is computed from the standard attenuation, its uncertainty, the retained texture and the acquisition descriptor.",
+   "code": [
+    {
+     "path": "acquisition/density.py",
+     "symbol": "density_indicator",
+     "resolved": true
+    },
+    {
+     "path": "acquisition/density.py",
+     "symbol": "DensityModel",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3c-concept-layer",
+   "paper_location": "Sec. III-C; Table I",
+   "claim": "The concept layer is informed by SNOMED CT, RadLex, LOINC and DICOM Structured Reporting.",
+   "code": [
+    {
+     "path": "ontology/index.py",
+     "symbol": "build_concept_index",
+     "resolved": true
+    },
+    {
+     "path": "grounding/standard.py",
+     "symbol": "ground_to_standard",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3c-owl2-el-profile",
+   "paper_location": "Table I caption",
+   "claim": "All axioms are expressed in OWL 2 EL; negation, universal restrictions and cardinality are not expressible and are not used.",
+   "code": [
+    {
+     "path": "ontology/profile.py",
+     "symbol": "is_el",
+     "resolved": true
+    },
+    {
+     "path": "ontology/profile.py",
+     "symbol": "require_el",
+     "resolved": true
+    },
+    {
+     "path": "ontology/profile.py",
+     "symbol": "profile_errors",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "table1-axiom-families",
+   "paper_location": "Table I",
+   "claim": "Five axiom families are released: identity, band, tier, severity and evidence, each either hard or soft.",
+   "code": [
+    {
+     "path": "ontology/axioms.py",
+     "symbol": "FAMILY_TABLE",
+     "resolved": true
+    },
+    {
+     "path": "ontology/axioms.py",
+     "symbol": "AxiomSet",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3d-operator",
+   "paper_location": "Sec. III-D; Algorithm 1",
+   "claim": "The operator resolves unresolved identifiers, runs a deterministic repair loop in a fixed family order with a budget B, and returns an admission or a typed abstention.",
+   "code": [
+    {
+     "path": "decision/operator.py",
+     "symbol": "constrain",
+     "resolved": true
+    },
+    {
+     "path": "decision/repair.py",
+     "symbol": "repair_loop",
+     "resolved": true
+    },
+    {
+     "path": "decision/repair.py",
+     "symbol": "resolve_identifiers",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3d-repair-order",
+   "paper_location": "Algorithm 1, line 10",
+   "claim": "The repair order is fixed at identity, band, tier, severity, evidence.",
+   "code": [
+    {
+     "path": "ontology/axioms.py",
+     "symbol": "FAMILY_ORDER",
+     "resolved": true
+    },
+    {
+     "path": "ontology/axioms.py",
+     "symbol": "REPAIRABLE_ORDER",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3d-termination-reasons",
+   "paper_location": "Sec. III-D, after Algorithm 2",
+   "claim": "Every termination route carries a reason string so an abstention is subject to the same scrutiny as an emission.",
+   "code": [
+    {
+     "path": "decision/abstention.py",
+     "symbol": "TERMINATION_REASONS",
+     "resolved": true
+    },
+    {
+     "path": "decision/abstention.py",
+     "symbol": "abstain",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "algorithm2-agent",
+   "paper_location": "Algorithm 2",
+   "claim": "The end-to-end agent exposes ten tools and returns a serialised record with conformance or a typed abstention.",
+   "code": [
+    {
+     "path": "agent/pipeline.py",
+     "symbol": "run_agent",
+     "resolved": true
+    },
+    {
+     "path": "agent/tools.py",
+     "symbol": "ToolName",
+     "resolved": true
+    },
+    {
+     "path": "agent/tools.py",
+     "symbol": "Toolbox",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-conformance-endpoint",
+   "paper_location": "Sec. III-E",
+   "claim": "Conformance is defined so a third party can redo the computation from a record and the released artefact.",
+   "code": [
+    {
+     "path": "ontology/axioms.py",
+     "symbol": "conformance_score",
+     "resolved": true
+    },
+    {
+     "path": "decision/conformance.py",
+     "symbol": "summarise",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-prespecified-criterion",
+   "paper_location": "Sec. III-E, pre-specified success criterion",
+   "claim": "The primary success standard is a conformance rate of at least 0.90, fixed before any experiments.",
+   "code": [
+    {
+     "path": "evaluation/study.py",
+     "symbol": "axiom_set_from_config",
+     "resolved": true
+    },
+    {
+     "path": "cli/support.py",
+     "symbol": "run_evaluation",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-architecture-independence",
+   "paper_location": "Sec. III-E, architecture dependence",
+   "claim": "The comparison includes a 3D convolutional network, a shifted-window transformer encoder, a foundation-model encoder and a descriptor-only scorer.",
+   "code": [
+    {
+     "path": "models/arms.py",
+     "symbol": "ARM_SPECS",
+     "resolved": true
+    },
+    {
+     "path": "models/blocks.py",
+     "symbol": "ConvEncoder3D",
+     "resolved": true
+    },
+    {
+     "path": "models/blocks.py",
+     "symbol": "ShiftedWindowEncoder3D",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-leakage-safeguards",
+   "paper_location": "Sec. III-E, leakage safeguards",
+   "claim": "Partitions are patient-level; Site C is held out of development entirely.",
+   "code": [
+    {
+     "path": "cohort/fixture.py",
+     "symbol": "build_cohort_fixture",
+     "resolved": true
+    },
+    {
+     "path": "training/trainer.py",
+     "symbol": "patient_split",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4a-main-comparison",
+   "paper_location": "Sec. IV-A; Table II",
+   "claim": "The main comparison reports AUROC with an interval, sensitivity at 90% specificity, conformance, unsupported-code rate and abstention rate.",
+   "code": [
+    {
+     "path": "evaluation/main_comparison.py",
+     "symbol": "run_main_comparison",
+     "resolved": true
+    },
+    {
+     "path": "metrics/discrimination.py",
+     "symbol": "auc",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4b-family-ablation",
+   "paper_location": "Sec. IV-B; Table III",
+   "claim": "Each family is discarded in turn and the conformance of the system declines for every removal.",
+   "code": [
+    {
+     "path": "evaluation/family_ablation.py",
+     "symbol": "run_family_ablation",
+     "resolved": true
+    },
+    {
+     "path": "ontology/axioms.py",
+     "symbol": "AxiomSet.without_family",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4b-planner-substitution",
+   "paper_location": "Sec. IV-B, final paragraph",
+   "claim": "Replacing the planner with a text-only model or the scorer with a tool-free descriptor model moves conformance by at most one point.",
+   "code": [
+    {
+     "path": "models/arms.py",
+     "symbol": "SUBSTITUTED_ARMS",
+     "resolved": true
+    },
+    {
+     "path": "evaluation/family_ablation.py",
+     "symbol": "run_family_ablation",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4c-clinical-validation",
+   "paper_location": "Sec. IV-C; Table IV",
+   "claim": "The clinical endpoint is the concordance for time to first incident fracture with treatment-aware censoring, reported with calibration and decision utility.",
+   "code": [
+    {
+     "path": "metrics/survival.py",
+     "symbol": "concordance_index",
+     "resolved": true
+    },
+    {
+     "path": "metrics/survival.py",
+     "symbol": "CensoringRule",
+     "resolved": true
+    },
+    {
+     "path": "metrics/calibration.py",
+     "symbol": "calibration_slope_intercept",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4c-reclassification",
+   "paper_location": "Sec. IV-C",
+   "claim": "Net reclassification improvement against the clinical comparator is reported with its interval.",
+   "code": [
+    {
+     "path": "metrics/reclassification.py",
+     "symbol": "reclassify",
+     "resolved": true
+    },
+    {
+     "path": "metrics/reclassification.py",
+     "symbol": "nri_interval",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4d-reader-study",
+   "paper_location": "Sec. IV-D",
+   "claim": "A retrospective three-arm reading study reports reader agreement and mean reading time; a silent-mode audit reports emissions without a reader.",
+   "code": [
+    {
+     "path": "evaluation/reader_study.py",
+     "symbol": "run_reader_study",
+     "resolved": true
+    },
+    {
+     "path": "evaluation/silent_mode.py",
+     "symbol": "run_silent_mode",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4e-dissociation",
+   "paper_location": "Sec. IV-E; Finding 2",
+   "claim": "Deformity and densitometric status dissociate and the dissociated stratum carries a higher fracture incidence.",
+   "code": [
+    {
+     "path": "evaluation/dissociation.py",
+     "symbol": "run_dissociation",
+     "resolved": true
+    },
+    {
+     "path": "evaluation/findings.py",
+     "symbol": "assemble_findings",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4f-finding-one",
+   "paper_location": "Sec. IV-F; Finding 1",
+   "claim": "The agreement and conformance axes admit no monotone order: adding an axiom can raise conformance while lowering agreement.",
+   "code": [
+    {
+     "path": "evaluation/findings.py",
+     "symbol": "assemble_findings",
+     "resolved": true
+    },
+    {
+     "path": "evaluation/family_ablation.py",
+     "symbol": "non_monotone_rows",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "fig2-mechanism-evidence",
+   "paper_location": "Fig. 2",
+   "claim": "Adding the axiom families in the published fixed order raises conformance monotonically while the classification and concordance curves do not.",
+   "code": [
+    {
+     "path": "evaluation/family_ablation.py",
+     "symbol": "cumulative_family_axes",
+     "resolved": true
+    },
+    {
+     "path": "evaluation/family_ablation.py",
+     "symbol": "conformance_is_monotone",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec4g-per-examination-cost",
+   "paper_location": "Sec. IV-G",
+   "claim": "The pipeline is reported at a per-examination cost suitable for batch operation.",
+   "code": [
+    {
+     "path": "cli/agent.py",
+     "symbol": "agent_run",
+     "resolved": true
+    },
+    {
+     "path": "agent/pipeline.py",
+     "symbol": "run_cohort",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-dicom-sr-serialisation",
+   "paper_location": "Algorithm 2, line 17",
+   "claim": "The admitted record is serialised as a DICOM Structured Reporting document.",
+   "code": [
+    {
+     "path": "serialisation/dcm_sr.py",
+     "symbol": "build_sr_tree",
+     "resolved": true
+    },
+    {
+     "path": "serialisation/dcm_sr.py",
+     "symbol": "serialise_record",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-tool-inventory",
+   "paper_location": "Sec. III-D, after Algorithm 1",
+   "claim": "The agent reveals ten tools, and the report carries the tool inventory, planner configuration, call numbers and the error path.",
+   "code": [
+    {
+     "path": "agent/tools.py",
+     "symbol": "TOOL_ORDER",
+     "resolved": true
+    },
+    {
+     "path": "agent/tools.py",
+     "symbol": "tool_report",
+     "resolved": true
+    },
+    {
+     "path": "agent/planner.py",
+     "symbol": "planner_report",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-hyperparameters",
+   "paper_location": "Sec. III-E, implementation; Section IV tables (five seeds)",
+   "claim": "Every reported table is a mean over five training runs; the manuscript does not print the optimiser, schedule or batch profile.",
+   "code": [
+    {
+     "path": "training/trainer.py",
+     "symbol": "TrainConfig",
+     "resolved": true
+    },
+    {
+     "path": "training/optim.py",
+     "symbol": "OptimConfig",
+     "resolved": true
+    },
+    {
+     "path": "training/schedule.py",
+     "symbol": "ScheduleConfig",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-ema-and-checkpoint",
+   "paper_location": "Sec. III-E, implementation",
+   "claim": "Checkpoints record the seed and are written atomically.",
+   "code": [
+    {
+     "path": "training/checkpoint.py",
+     "symbol": "save_checkpoint",
+     "resolved": true
+    },
+    {
+     "path": "training/checkpoint.py",
+     "symbol": "content_digest",
+     "resolved": true
+    },
+    {
+     "path": "training/ema.py",
+     "symbol": "EmaTracker",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "sec3e-uncertainty-budget",
+   "paper_location": "Sec. III-B, second paragraph",
+   "claim": "The uncertainty budget is not ornamentation: the interval, not the point estimate, drives the band check.",
+   "code": [
+    {
+     "path": "ontology/bands.py",
+     "symbol": "interval_straddles_threshold",
+     "resolved": true
+    },
+    {
+     "path": "acquisition/harmonise.py",
+     "symbol": "HarmonisedAttenuation",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  },
+  {
+   "id": "table1-hardened-regulariser",
+   "paper_location": "Sec. III-C, second boundary resolution; Table III row 10",
+   "claim": "The constraint mechanism is not regularisation: the same axioms applied as an additive penalty do not guarantee conformance.",
+   "code": [
+    {
+     "path": "losses/regulariser.py",
+     "symbol": "axiom_penalty",
+     "resolved": true
+    },
+    {
+     "path": "losses/total.py",
+     "symbol": "compose",
+     "resolved": true
+    }
+   ],
+   "verification": "EXECUTED"
+  }
+ ],
+ "deviations": [
+  {
+   "paper_location": "Sec. III, main validation layer",
+   "topic": "the multicentre cohort is not distributed",
+   "departure": "The release ships a schema-compatible cohort fixture in place of the study cohort. The fixture reproduces the record layout, the acquisition bias structure and the dissociation property the analyses depend on. No manuscript table value is produced from it, and every cohort-level quantity in the evaluation output is derived from the fixture and labelled as such.",
+   "justification": "the cohort is held under institutional data-usage terms and cannot be redistributed; a fixture keeps every mechanism executable and checkable without inventing a study result"
+  },
+  {
+   "paper_location": "Sec. III-C; Data and Code Availability",
+   "topic": "the four terminology releases are licence-gated",
+   "departure": "The concept index is a curated, redistributable subset addressed by release-local keys of the form OSTEOCT-nnnn, each carrying the source system and the display term. The licensed release files of SNOMED CT, RadLex, LOINC and DICOM Structured Reporting are not bundled, so live identifier resolution is not performed.",
+   "justification": "SNOMED CT requires a licence in most jurisdictions; the release-local keys keep the identity axiom exactly satisfiable and checkable without redistributing licensed content"
+  },
+  {
+   "paper_location": "Sec. III-E, implementation; Table I caption",
+   "topic": "Owlready2 and a separate EL inference engine are not installed on the verification host",
+   "departure": "The OWL 2 EL profile check and the role-hierarchy closure are implemented in ontology/profile.py rather than delegated to Owlready2. The profile check rejects negation, universal restrictions and cardinality exactly as Table I states.",
+   "justification": "the dependency is unavailable on the verification host; the native implementation is more checkable and the profile boundary is asserted by its own tests"
+  },
+  {
+   "paper_location": "Algorithm 2, line 17",
+   "topic": "pydicom is not installed on the verification host",
+   "departure": "The DICOM Structured Reporting content tree is built and serialised in a documented textual form; emission of a Part-10 byte stream is available through serialisation/dcm_sr.py when pydicom is importable, and that path is reported BLOCKED here.",
+   "justification": "the dependency is unavailable; the content tree, its concept sequence and its digest are all exercised, so the serialisation step is fully checked short of the byte encoding"
+  },
+  {
+   "paper_location": "Sec. III-B, first paragraph",
+   "topic": "the pretrained shifted-window CT encoder is not bundled",
+   "departure": "The perception arm uses compact in-repo encoders that satisfy the same token contract and carry the same attention-projection names. Which encoder was used is recorded in every run report.",
+   "justification": "the manuscript states the decision-layer result does not depend on the perception architecture and ablates it accordingly, so the arm is executable with an in-repo encoder"
+  },
+  {
+   "paper_location": "Sec. III-E; Section IV tables",
+   "topic": "the manuscript does not print the optimiser, schedule, batch profile, repair budget or conformance weights",
+   "departure": "Optimiser, learning rate, schedule, batch size, accumulation, precision, early-stopping patience, repair budget and the five conformance weights are engineering defaults exposed in configs/train/default.yaml, configs/pipeline/agent.yaml and ontology/axioms.py. The weights are ordered to follow the ordering of the manuscript's own conformance deltas. Five seeds are the manuscript's, not a default.",
+   "justification": "the manuscript is silent on these values; exposing them in configuration keeps the silence visible instead of hiding it in code"
+  },
+  {
+   "paper_location": "Sec. IV-C; Table IV",
+   "topic": "the manuscript does not print the risk mapping that feeds the clinical endpoint",
+   "departure": "The admitted record's clinical risk blends the learned probability with a structural term built from the FRAX-style band and tier and a monotone severity multiplier, exposed as SEVERITY_BONUS and MODEL_RISK_BLEND in agent/pipeline.py.",
+   "justification": "the severity family can only move the concordance endpoint if the admitted severity enters the risk, so the mapping is declared rather than left implicit"
+  },
+  {
+   "paper_location": "Sec. III-E, leakage safeguards",
+   "topic": "threshold selection",
+   "departure": "Decision thresholds are selected on a patient-disjoint validation slice of the development partition rather than on the internal test partition.",
+   "justification": "selecting on the test partition would leak, and the manuscript's leakage-safeguard paragraph forbids it"
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+voltage_slope_hu_per_kvp: 0.42
+reference_voltage_kvp: 120.0
+sampling_weight: 0.85
+within_scan_floor_hu: 2.2
+kernel_spread_hu: 1.0
+
+density:
+  intercept: 42.0
+  attenuation_gain: 0.78
+  uncertainty_penalty: 0.55
+  voltage_gain: 0.16
+  kernel_gain: 3.1
+  texture_scale: 1.0
+  texture_weights:
+    glcm_contrast: -0.037
+    glcm_correlation: 5.4
+    glcm_energy: -12.6
+    glcm_homogeneity: 3.2
+    glcm_dissimilarity: -0.061
+    rlm_sre: 18.0
+    rlm_lre: -0.004
+    rlm_gln: 6.1
+    rlm_rln: -2.7
+    rlm_rp: -1.9
+    wavelet_lll_energy: 0.014
+    wavelet_lhl_energy: -0.028
+    wavelet_llh_energy: -0.019
+    wavelet_lhh_energy: 0.009
+    lbp_mean_popcount: -0.42
+    lbp_sd_popcount: 0.16
+    lbp_transition_mean: -0.31
+    lbp_uniform_share: 12.4
+    lbp_histogram_entropy: -1.6

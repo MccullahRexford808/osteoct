@@ -1,0 +1,19 @@
+defaults:
+  - ontology: osteoct
+  - acquisition: harmonisation
+  - cohort: fixture
+  - pipeline: agent
+  - model: scorer
+  - train: default
+
+arm: constrained
+
+ontology:
+  active_families:
+    - id
+    - band
+    - sev
+    - ev
+
+pipeline:
+  constrain_budget: 6

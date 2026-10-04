@@ -1,0 +1,35 @@
+release Ontology-Guided Opportunistic CT Agent for Early Osteoporosis Prognosis Using Vertebral Attenuation, Trabecular Texture, and Fracture-Risk Semantics
+config configs/experiment/main.yaml
+checks 86
+PASS 82
+FAIL 1
+NOT_RUN 1
+BLOCKED 2
+manuscript checks 11
+manuscript discrepancies 1
+overall_status UNVERIFIED
+code_status PARTIALLY_VERIFIED
+
+checks by category
+  algorithm: PASS 11, FAIL 0, NOT_RUN 0, BLOCKED 0
+  artefact: PASS 3, FAIL 0, NOT_RUN 0, BLOCKED 0
+  environment: PASS 5, FAIL 0, NOT_RUN 1, BLOCKED 1
+  execution: PASS 9, FAIL 0, NOT_RUN 0, BLOCKED 0
+  gating: PASS 5, FAIL 0, NOT_RUN 0, BLOCKED 0
+  hygiene: PASS 10, FAIL 0, NOT_RUN 0, BLOCKED 0
+  manuscript: PASS 10, FAIL 1, NOT_RUN 0, BLOCKED 0
+  measurement: PASS 9, FAIL 0, NOT_RUN 0, BLOCKED 0
+  metric: PASS 9, FAIL 0, NOT_RUN 0, BLOCKED 0
+  provenance: PASS 4, FAIL 0, NOT_RUN 0, BLOCKED 0
+  serialisation: PASS 2, FAIL 0, NOT_RUN 0, BLOCKED 1
+  statistic: PASS 5, FAIL 0, NOT_RUN 0, BLOCKED 0
+
+non-passing checks
+  BLOCKED serialisation.part10_encoding: pydicom is not installed on this verification host, so only the content tree is exercised
+  NOT_RUN env.dataset_links: the live probe is opt-in; run the verifier with --probe-live to exercise it
+  FAIL ms.table4_distinct_intervals: these rows report an identical concordance with an identical interval: 3-D shifted-window transformer and Tool-using agent, no ontology layer; the two configurations differ elsewhere in the manuscript
+  BLOCKED env.docker_build: no container runtime is available on this verification host
+
+free-text detail
+  gate.pre_specified_conformance {'criterion': 0.9, 'observed': 1.0, 'met': True, 'partition': 'internal_test', 'source': 'cohort fixture'}
+  gate.severity_gain_against_mcid {'change': -0.014493, 'mcid': 0.03, 'exceeds_mcid': False}

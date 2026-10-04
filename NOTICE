@@ -1,0 +1,84 @@
+Third-party material
+
+This release is the authors' own implementation of the work described in
+"Ontology-Guided Opportunistic CT Agent for Early Osteoporosis Prognosis Using
+Vertebral Attenuation, Trabecular Texture, and Fracture-Risk Semantics". It bundles no
+third-party code, no third-party model weights and no third-party data. The resources
+below are named because the implementation interoperates with them or because the
+preprocessing described in the manuscript depends on them. Copyright in each remains
+with its authors.
+
+Datasets
+
+1. CTSpine1K, a large-scale computed-tomography spinal vertebrae segmentation collection.
+   Repository: https://github.com/MIRACLE-Center/CTSpine1K
+   Paper:      Deng et al., Machine Learning for Biomedical Imaging, MICCAI Open Data
+               2024-2025, 824-832 (2025).
+   Licence:    openly distributed; consult the repository's own terms before
+               redistribution. Not redistributed here.
+   Role:       anatomical pre-training for the localisation stage.
+
+2. TotalSegmentator, segmentations of 104 anatomical structures in computed tomography.
+   Repository: https://github.com/wasserth/TotalSegmentator
+   Dataset:    https://zenodo.org/records/22688904
+   Paper:      Wasserthal et al., Radiology: Artificial Intelligence 5, e230024 (2023).
+   Licence:    the dataset is published under a Creative Commons Attribution licence;
+               consult the record's own terms before redistribution. Not redistributed
+               here.
+   Role:       reference organ definition for abdominal localisation in preprocessing.
+
+3. VerSe, the large-scale vertebrae segmentation challenge collection.
+   Repository: https://github.com/anjany/verse
+   Dataset:    https://osf.io/nqjyw/
+   Record:     https://zenodo.org/records/3759104
+   Licence:    distributed on request through the challenge page; consult the challenge
+               rules and the record terms before redistribution. Not redistributed here.
+   Role:       protocol-stress component for the localisation stage.
+
+Terminologies
+
+4. The concept layer is informed by four published sources. Their full releases are
+   governed by their own licences and are not bundled.
+
+   SNOMED CT (SNOMED International). Licence-gated in most jurisdictions; the
+   implementation does not redistribute any SNOMED CT content. Browser:
+   https://browser.ihtsdotools.org/
+
+   RadLex (Radiological Society of North America). Term browser:
+   https://www.radlex.org/RID/
+
+   LOINC (Regenstrief Institute). The release is published at loinc.org; no content from
+   it is redistributed or copied here.
+
+   DICOM Structured Reporting, PS3.16 coded terminology (National Electrical
+   Manufacturers Association). Public specification:
+   https://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_A.html
+
+   The shipped index carries release-local keys of the form OSTEOCT-nnnn, each recording
+   the source system and the display term. Live identifier resolution against the
+   licensed releases is not performed.
+
+Standards referenced by the axiom families
+
+5. ISCD Official Positions and the WHO T-score band definitions supply the diagnostic
+   band axioms; FRAX supplies the risk-tier semantics; the Genant semiquantitative
+   grading supplies the severity axioms. These are clinical standards, not datasets; no
+   material from them is redistributed, and the thresholds are stated as method
+   constants in configs/ontology/osteoct.yaml.
+
+Software
+
+The implementation depends on PyTorch, NumPy, SciPy, scikit-learn and PyYAML, all under
+their own licences, and on pytest, ruff, black, isort and mypy as development tooling.
+Optional support for DICOM Part-10 encoding uses pydicom when it is installed. No source
+from those projects is copied into this repository; they are consumed as installed
+packages.
+
+Clinical cohort
+
+The multicentre cohort (sites S1-S3 across two regions) is not third-party material and
+is not distributed. It is held under the data-usage terms of the contributing
+institutions, its records cannot be released at record level, and the manuscript's
+data-availability statement says the same. The cohort-level quantities reported in the
+evaluation output are produced by the schema-compatible cohort fixture shipped with this
+release, never from the study cohort, and no manuscript table value is claimed from it.

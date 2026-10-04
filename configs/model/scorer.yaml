@@ -1,0 +1,14 @@
+arm: constrained
+descriptor_dim: 3
+texture_dim: 25
+concept_dim: 30
+embed_dim: 16
+hidden: 64
+dropout: 0.1
+device: cpu
+
+encoder:
+  convolutional_depth: 3
+  shifted_window_depth: 2
+  shifted_window_size: 4
+  shifted_window_heads: 2

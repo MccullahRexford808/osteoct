@@ -1,0 +1,62 @@
+bone_window_low_hu: 55.0
+cortical_erosion_voxels: 1
+endplate_exclusion_fraction: 0.18
+minimum_trabecular_voxels: 24
+marrow_fat_correction_hu: 2.5
+
+anterior_share: 0.34
+posterior_share: 0.34
+reference_column_fraction: 0.35
+
+roi_half_extent:
+  - 8
+  - 7
+  - 6
+level_span: 13
+
+sites:
+  - S1
+  - S2
+  - S3
+regions:
+  - R1
+  - R2
+examinations_per_site: 144
+bodies: 13
+slices_per_body: 10
+slice_gap: 2
+rows: 24
+columns: 24
+development_share: 0.68
+
+attenuation_mean_hu: 178.0
+attenuation_sd_hu: 48.0
+texture_grain_hu: 11.0
+height_loss_scale: 0.16
+dissociation_share: 0.35
+dissociation_grade_floor: 0.28
+dissociation_attenuation_shift_hu: 46.0
+dissociation_hazard_ratio: 2.6
+baseline_five_year_incidence: 0.05
+hazard_attenuation_slope: 0.011
+hazard_height_slope: 3.1
+prior_fracture_hazard_ratio: 1.7
+treatment_hazard_ratio: 0.82
+followup_days: 1825.0
+first_event_fraction: 0.62
+reference_density_share: 0.44
+prior_fracture_share: 0.17
+treatment_exposure_share: 0.23
+glucocorticoid_share: 0.08
+age_mean: 64.0
+age_sd: 11.0
+bmi_mean: 25.4
+bmi_sd: 4.1
+fixture_seed: 20260928
+
+texture:
+  grey_levels: 32
+  window_low_hu: -200.0
+  window_high_hu: 1400.0
+  wavelet_levels: 2
+  stability_threshold: 0.75

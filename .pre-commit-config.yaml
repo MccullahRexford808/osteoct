@@ -1,0 +1,28 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: ruff check .
+        language: system
+        pass_filenames: false
+      - id: black
+        name: black
+        entry: black --check .
+        language: system
+        pass_filenames: false
+      - id: isort
+        name: isort
+        entry: isort --check-only .
+        language: system
+        pass_filenames: false
+      - id: mypy
+        name: mypy
+        entry: mypy src/osteoct
+        language: system
+        pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: python -m pytest -q
+        language: system
+        pass_filenames: false

@@ -1,0 +1,70 @@
+experiment main
+seeds 5
+
+main comparison, internal multicentre test partition
+  labelled examinations 105
+  patients with fracture follow-up 234
+  method | AUROC (95% CI) | sensitivity at 90% specificity | conformance | unsupported | abstention
+  Vertebral HU threshold rule | 0.944 (0.895-0.981) | 0.750 | 0.924 +- 0.000 | 0.048 +- 0.000 | 0.000 +- 0.000
+  3-D convolutional network | 0.494 (0.271-0.744) | 0.000 | 0.642 +- 0.079 | 0.581 +- 0.139 | 0.000 +- 0.000
+  3-D shifted-window transformer | 0.550 (0.280-0.762) | 0.000 | 0.700 +- 0.068 | 0.579 +- 0.140 | 0.000 +- 0.000
+  Multimodal foundation encoder | 0.490 (0.203-0.691) | 0.000 | 0.684 +- 0.079 | 0.581 +- 0.139 | 0.000 +- 0.000
+  Tool-free scorer (descriptors) | 0.453 (0.149-0.950) | 0.250 | 0.740 +- 0.051 | 0.482 +- 0.050 | 0.000 +- 0.000
+  Tool-using agent, no ontology layer | 0.550 (0.280-0.762) | 0.000 | 0.700 +- 0.068 | 0.579 +- 0.140 | 0.000 +- 0.000
+  OSTEO-CT (constrained) | 0.891 (0.816-0.955) | 0.500 | 1.000 +- 0.000 | 0.000 +- 0.000 | 0.023 +- 0.019
+
+constraint-family ablation and component substitution
+  configuration | AUROC | delta AUROC | C-index | conformance | delta conformance
+  all_families | 0.891 | +0.000 | 0.583 | 1.000 | +0.000
+  without_identity | 0.891 | +0.000 | 0.583 | 0.700 | -0.300
+  without_band | 0.297 | +0.594 | 0.659 | 0.720 | -0.280
+  without_tier | 0.891 | +0.000 | 0.581 | 0.800 | -0.200
+  without_severity | 0.943 | -0.052 | 0.568 | 0.900 | -0.100
+  without_evidence | 0.891 | +0.000 | 0.583 | 0.880 | -0.120
+  Text-only planner + operator | 0.910 | -0.019 | 0.622 | 1.000 | +0.000
+  Tool-free scorer + operator | 0.896 | -0.005 | 0.625 | 1.000 | +0.000
+  Hard regulariser, same axioms | 0.550 | +0.342 | 0.641 | 0.700 | -0.300
+  every family removal lowers conformance: True
+
+clinical-outcome validation, internal multicentre test partition
+  method | C-index (95% CI) | calibration slope | calibration intercept | NB at 0.20 | NB at 0.30
+  Vertebral HU threshold rule | 0.587 (0.491-0.676) | 0.995 | +2.383 | 0.036 | 0.000
+  3-D shifted-window transformer | 0.641 (0.549-0.732) | 6.100 | +0.278 | 0.369 | 0.279
+  Tool-using agent, no ontology layer | 0.641 (0.549-0.732) | 6.100 | +0.278 | 0.369 | 0.279
+  OSTEO-CT (constrained) | 0.583 (0.493-0.672) | 3.869 | +0.430 | 0.369 | 0.279
+  reclassification against the comparator at cut 0.50: NRI -0.057 (events 8 up 6 down, non-events 9 up 6 down)
+
+reading study and deployment audit
+  studies 400, raters 4
+  agreement kappa 0.674 (0.599-0.736)
+  mean reading seconds clinician_alone 83.96, clinician_with_model 61.11, model_alone 3.00
+  reading time reduction 22.853 seconds
+  silent mode processed 144, emitted 144, abstained 0, escalated share 1.0000
+
+deformity and densitometric dissociation
+  patients 234, deformed 114, deformed and densitometrically normal or osteopenic 110
+  dissociated share 0.9649
+  incidence ratio 3.2571
+  missed by a density-only rule 110
+
+named findings
+  finding_1_unordered_axes: holds=True
+    For a decision layer constrained by an ontology of clinical standards, the pair consisting of agreement with the reference assessment and conformance with the encoded standard admits no monotone order: adding an axiom can raise conformance while lowering agreement.
+    agreement_and_conformance_move_in_opposite_directions = False
+    conformance_monotone_under_removal = True
+    reference_auroc = 0.8911
+    reference_c_index = 0.5827
+    reference_conformance = 1.0
+    utility_increases_without_a_family = True
+  finding_2_dissociation: holds=True
+    Deformity and densitometric status dissociate, and the dissociation carries prognostic weight: a stratum of patients graded at or above the moderate deformity floor is densitometrically normal or osteopenic, and that stratum carries a higher five-year incidence of major osteoporotic fracture than densitometrically normal patients without deformity.
+    deformed_and_densitometrically_normal = 110
+    deformed_patients = 114
+    dissociated_share = 0.9649
+    incidence_deformed_normal_density = 0.6
+    incidence_normal_without_deformity = 0.1842
+    incidence_ratio = 3.2571
+    missed_by_density_only_rule = 110
+    patients = 234
+
+Every cohort-level value above is produced from the schema-compatible cohort fixture shipped with this release, not from the study cohort, which is not distributed.

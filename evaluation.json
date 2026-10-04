@@ -1,0 +1,383 @@
+{
+ "experiment": "main",
+ "seeds": 5,
+ "table_main_comparison": {
+  "partition": "internal_test",
+  "labelled_examinations": 105,
+  "patients_with_followup": 234,
+  "seeds": 5,
+  "rows": [
+   {
+    "method": "Vertebral HU threshold rule",
+    "policy": "unconstrained",
+    "auroc": 0.9443,
+    "auroc_ci": [
+     0.8954,
+     0.9811
+    ],
+    "sensitivity_at_90_specificity": 0.75,
+    "conformance": 0.9238,
+    "conformance_sd": 0.0,
+    "unsupported": 0.0476,
+    "unsupported_sd": 0.0,
+    "abstention": 0.0,
+    "abstention_sd": 0.0
+   },
+   {
+    "method": "3-D convolutional network",
+    "policy": "unconstrained",
+    "auroc": 0.4938,
+    "auroc_ci": [
+     0.2711,
+     0.7444
+    ],
+    "sensitivity_at_90_specificity": 0.0,
+    "conformance": 0.6415,
+    "conformance_sd": 0.0787,
+    "unsupported": 0.581,
+    "unsupported_sd": 0.1387,
+    "abstention": 0.0,
+    "abstention_sd": 0.0
+   },
+   {
+    "method": "3-D shifted-window transformer",
+    "policy": "unconstrained",
+    "auroc": 0.5495,
+    "auroc_ci": [
+     0.2805,
+     0.7624
+    ],
+    "sensitivity_at_90_specificity": 0.0,
+    "conformance": 0.7,
+    "conformance_sd": 0.0681,
+    "unsupported": 0.579,
+    "unsupported_sd": 0.1399,
+    "abstention": 0.0,
+    "abstention_sd": 0.0
+   },
+   {
+    "method": "Multimodal foundation encoder",
+    "policy": "unconstrained",
+    "auroc": 0.4901,
+    "auroc_ci": [
+     0.2027,
+     0.6907
+    ],
+    "sensitivity_at_90_specificity": 0.0,
+    "conformance": 0.6842,
+    "conformance_sd": 0.0786,
+    "unsupported": 0.581,
+    "unsupported_sd": 0.1387,
+    "abstention": 0.0,
+    "abstention_sd": 0.0
+   },
+   {
+    "method": "Tool-free scorer (descriptors)",
+    "policy": "unconstrained",
+    "auroc": 0.453,
+    "auroc_ci": [
+     0.149,
+     0.9498
+    ],
+    "sensitivity_at_90_specificity": 0.25,
+    "conformance": 0.7405,
+    "conformance_sd": 0.0508,
+    "unsupported": 0.4819,
+    "unsupported_sd": 0.0502,
+    "abstention": 0.0,
+    "abstention_sd": 0.0
+   },
+   {
+    "method": "Tool-using agent, no ontology layer",
+    "policy": "unconstrained",
+    "auroc": 0.5495,
+    "auroc_ci": [
+     0.2805,
+     0.7624
+    ],
+    "sensitivity_at_90_specificity": 0.0,
+    "conformance": 0.7,
+    "conformance_sd": 0.0681,
+    "unsupported": 0.579,
+    "unsupported_sd": 0.1399,
+    "abstention": 0.0,
+    "abstention_sd": 0.0
+   },
+   {
+    "method": "OSTEO-CT (constrained)",
+    "policy": "constrained",
+    "auroc": 0.8911,
+    "auroc_ci": [
+     0.8162,
+     0.9553
+    ],
+    "sensitivity_at_90_specificity": 0.5,
+    "conformance": 1.0,
+    "conformance_sd": 0.0,
+    "unsupported": 0.0,
+    "unsupported_sd": 0.0,
+    "abstention": 0.0229,
+    "abstention_sd": 0.0186
+   }
+  ]
+ },
+ "table_constraint_ablation": {
+  "rows": [
+   {
+    "configuration": "all_families",
+    "family": null,
+    "auroc": 0.8911,
+    "auroc_delta": 0.0,
+    "c_index": 0.5827,
+    "conformance": 1.0,
+    "conformance_delta": 0.0
+   },
+   {
+    "configuration": "without_identity",
+    "family": "identity",
+    "auroc": 0.8911,
+    "auroc_delta": 0.0,
+    "c_index": 0.5827,
+    "conformance": 0.7,
+    "conformance_delta": -0.3
+   },
+   {
+    "configuration": "without_band",
+    "family": "band",
+    "auroc": 0.297,
+    "auroc_delta": 0.5941,
+    "c_index": 0.6586,
+    "conformance": 0.72,
+    "conformance_delta": -0.28
+   },
+   {
+    "configuration": "without_tier",
+    "family": "tier",
+    "auroc": 0.8911,
+    "auroc_delta": 0.0,
+    "c_index": 0.5811,
+    "conformance": 0.8,
+    "conformance_delta": -0.2
+   },
+   {
+    "configuration": "without_severity",
+    "family": "severity",
+    "auroc": 0.9431,
+    "auroc_delta": -0.052,
+    "c_index": 0.5683,
+    "conformance": 0.9,
+    "conformance_delta": -0.1
+   },
+   {
+    "configuration": "without_evidence",
+    "family": "evidence",
+    "auroc": 0.8911,
+    "auroc_delta": 0.0,
+    "c_index": 0.5827,
+    "conformance": 0.88,
+    "conformance_delta": -0.12
+   },
+   {
+    "configuration": "Text-only planner + operator",
+    "family": null,
+    "auroc": 0.91,
+    "auroc_delta": -0.0189,
+    "c_index": 0.6218,
+    "conformance": 1.0,
+    "conformance_delta": 0.0
+   },
+   {
+    "configuration": "Tool-free scorer + operator",
+    "family": null,
+    "auroc": 0.896,
+    "auroc_delta": -0.005,
+    "c_index": 0.6249,
+    "conformance": 1.0,
+    "conformance_delta": 0.0
+   },
+   {
+    "configuration": "Hard regulariser, same axioms",
+    "family": null,
+    "auroc": 0.5495,
+    "auroc_delta": 0.3416,
+    "c_index": 0.6414,
+    "conformance": 0.7,
+    "conformance_delta": -0.3
+   }
+  ],
+  "conformance_monotone_under_removal": true,
+  "per_family_decline": {
+   "identity": true,
+   "band": true,
+   "tier": true,
+   "severity": true,
+   "evidence": true
+  }
+ },
+ "table_clinical_outcome": {
+  "partition": "internal_test",
+  "reclassification_cut": 0.5,
+  "rows": [
+   {
+    "method": "Vertebral HU threshold rule",
+    "c_index": 0.5871,
+    "c_index_ci": [
+     0.4911,
+     0.6765
+    ],
+    "calibration_slope": 0.9949,
+    "calibration_intercept": 2.383,
+    "net_benefit_0.20": 0.0357,
+    "net_benefit_0.30": 0.0,
+    "events": 52,
+    "censored": 53
+   },
+   {
+    "method": "3-D shifted-window transformer",
+    "c_index": 0.6414,
+    "c_index_ci": [
+     0.549,
+     0.7319
+    ],
+    "calibration_slope": 6.0998,
+    "calibration_intercept": 0.2784,
+    "net_benefit_0.20": 0.369,
+    "net_benefit_0.30": 0.2789,
+    "events": 52,
+    "censored": 53
+   },
+   {
+    "method": "Tool-using agent, no ontology layer",
+    "c_index": 0.6414,
+    "c_index_ci": [
+     0.549,
+     0.7319
+    ],
+    "calibration_slope": 6.0998,
+    "calibration_intercept": 0.2784,
+    "net_benefit_0.20": 0.369,
+    "net_benefit_0.30": 0.2789,
+    "events": 52,
+    "censored": 53
+   },
+   {
+    "method": "OSTEO-CT (constrained)",
+    "c_index": 0.5827,
+    "c_index_ci": [
+     0.4927,
+     0.6723
+    ],
+    "calibration_slope": 3.8694,
+    "calibration_intercept": 0.4299,
+    "net_benefit_0.20": 0.369,
+    "net_benefit_0.30": 0.2789,
+    "events": 52,
+    "censored": 53
+   }
+  ],
+  "reclassification": {
+   "nri": -0.05714285714285716,
+   "event_share": 0.14285714285714285,
+   "non_event_share": -0.2,
+   "cut": 0.5
+  }
+ },
+ "reading_study": {
+  "size": 400,
+  "raters": 4,
+  "agreement": {
+   "kappa": 0.6745,
+   "ci": [
+    0.599,
+    0.7362
+   ]
+  },
+  "mean_seconds": {
+   "clinician_alone": 83.964,
+   "model_alone": 3.0,
+   "clinician_with_model": 61.111
+  },
+  "accuracy": {
+   "clinician_alone": 0.8562,
+   "model_alone": 0.9325,
+   "clinician_with_model": 0.9206
+  },
+  "ratings": 3600
+ },
+ "silent_mode_audit": {
+  "partition": "external",
+  "processed": 144,
+  "emitted": 144,
+  "abstained": 0,
+  "abstention_reasons": {},
+  "mean_conformance": 1.0,
+  "unsupported_rate": 0.0,
+  "mean_risk": 0.4708,
+  "escalated_share": 1.0,
+  "escalation_threshold": 0.2,
+  "family_violation_rates": {
+   "id": 0.0,
+   "band": 0.0,
+   "tier": 0.0,
+   "sev": 0.0,
+   "ev": 0.0
+  },
+  "repaired_share": 0.7569
+ },
+ "dissociation": {
+  "patients": 234,
+  "deformed": 114,
+  "deformed_and_densitometrically_normal": 110,
+  "normal_without_deformity": 38,
+  "dissociated_share": 0.9649,
+  "incidence_ratio": 3.2571,
+  "missed_by_density_only_rule": 110,
+  "strata": [
+   {
+    "label": "deformed, densitometrically normal or osteopenic",
+    "patients": 110,
+    "events": 66,
+    "five_year_incidence": 0.6
+   },
+   {
+    "label": "densitometrically normal without deformity",
+    "patients": 38,
+    "events": 7,
+    "five_year_incidence": 0.1842
+   }
+  ]
+ },
+ "findings": {
+  "findings": [
+   {
+    "id": "finding_1_unordered_axes",
+    "statement": "For a decision layer constrained by an ontology of clinical standards, the pair consisting of agreement with the reference assessment and conformance with the encoded standard admits no monotone order: adding an axiom can raise conformance while lowering agreement.",
+    "holds": true,
+    "evidence": {
+     "conformance_monotone_under_removal": true,
+     "utility_increases_without_a_family": true,
+     "agreement_and_conformance_move_in_opposite_directions": false,
+     "reference_auroc": 0.8911,
+     "reference_c_index": 0.5827,
+     "reference_conformance": 1.0
+    }
+   },
+   {
+    "id": "finding_2_dissociation",
+    "statement": "Deformity and densitometric status dissociate, and the dissociation carries prognostic weight: a stratum of patients graded at or above the moderate deformity floor is densitometrically normal or osteopenic, and that stratum carries a higher five-year incidence of major osteoporotic fracture than densitometrically normal patients without deformity.",
+    "holds": true,
+    "evidence": {
+     "patients": 234,
+     "deformed_patients": 114,
+     "deformed_and_densitometrically_normal": 110,
+     "dissociated_share": 0.9649,
+     "incidence_deformed_normal_density": 0.6,
+     "incidence_normal_without_deformity": 0.1842,
+     "incidence_ratio": 3.2571,
+     "missed_by_density_only_rule": 110
+    }
+   }
+  ],
+  "count": 2
+ }
+}

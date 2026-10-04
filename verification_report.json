@@ -1,0 +1,1368 @@
+{
+ "release": {
+  "title": "Ontology-Guided Opportunistic CT Agent for Early Osteoporosis Prognosis Using Vertebral Attenuation, Trabecular Texture, and Fracture-Risk Semantics",
+  "venue": "IEEE Journal of Biomedical and Health Informatics",
+  "release_slug": "osteoct",
+  "importable_package": "osteoct",
+  "config": "configs/experiment/main.yaml",
+  "report": "verification_report.json"
+ },
+ "summary": {
+  "PASS": 82,
+  "FAIL": 1,
+  "NOT_RUN": 1,
+  "BLOCKED": 2,
+  "overall_status": "UNVERIFIED",
+  "code_status": "PARTIALLY_VERIFIED",
+  "checks": 86,
+  "manuscript_checks": 11,
+  "manuscript_discrepancies": [
+   {
+    "id": "ms.table4_distinct_intervals",
+    "category": "manuscript",
+    "description": "two different configurations in the clinical table cannot share one interval",
+    "status": "FAIL",
+    "detail": "these rows report an identical concordance with an identical interval: 3-D shifted-window transformer and Tool-using agent, no ontology layer; the two configurations differ elsewhere in the manuscript, so the duplication is left standing rather than reconciled",
+    "evidence": {}
+   }
+  ],
+  "code_counts": {
+   "PASS": 72,
+   "FAIL": 0,
+   "NOT_RUN": 1,
+   "BLOCKED": 2
+  }
+ },
+ "claim_mapping": {
+  "artifact": "paper-claim to code mapping",
+  "claims": 34,
+  "anchors": 78,
+  "resolved_anchors": 78
+ },
+ "checks": [
+  {
+   "id": "pass1.claim_mapping",
+   "category": "provenance",
+   "description": "every paper claim resolves to a real file and a real module-level symbol",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "claims": 34,
+    "anchors": 78,
+    "resolved_anchors": 78,
+    "unresolved": []
+   }
+  },
+  {
+   "id": "pass1.unique_claim_ids",
+   "category": "provenance",
+   "description": "claim identifiers are unique",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "claims": 34
+   }
+  },
+  {
+   "id": "pass1.paper_locations",
+   "category": "provenance",
+   "description": "every claim names the manuscript location it came from",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "claims": 34
+   }
+  },
+  {
+   "id": "pass1.deviation_register",
+   "category": "provenance",
+   "description": "every departure names its manuscript location and its justification",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "deviations": 8
+   }
+  },
+  {
+   "id": "pass2.data_read",
+   "category": "execution",
+   "description": "a cohort record carries a volume, an acquisition descriptor, a bundle and supervision",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "records": 432,
+    "usable": 432,
+    "volume_shape": [
+     24,
+     24,
+     156
+    ],
+    "vertebrae": 13,
+    "texture_width": 25,
+    "concept_width": 30,
+    "partitions": {
+     "development": 183,
+     "internal_test": 105,
+     "external": 144
+    }
+   }
+  },
+  {
+   "id": "pass2.forward",
+   "category": "execution",
+   "description": "the forward pass returns four head outputs at the declared width",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "widths": {
+     "band": [
+      8,
+      4
+     ],
+     "tier": [
+      8,
+      4
+     ],
+     "severity": [
+      8,
+      4
+     ],
+     "risk": [
+      8
+     ]
+    },
+    "rows": 8
+   }
+  },
+  {
+   "id": "pass2.loss",
+   "category": "execution",
+   "description": "the composite objective returns a finite scalar and its parts",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "total": 4.025173,
+    "parts": {
+     "supervised": 3.9218947887420654,
+     "calibration": 0.5163910388946533,
+     "regulariser": 0.0,
+     "total": 4.025173187255859
+    }
+   }
+  },
+  {
+   "id": "pass2.backward",
+   "category": "execution",
+   "description": "the loss reaches every trained parameter",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "reached": 12,
+    "parameters": 12
+   }
+  },
+  {
+   "id": "pass2.parameter_update",
+   "category": "execution",
+   "description": "one optimiser step moves the trained parameters",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "moved": 11,
+    "parameters": 12
+   }
+  },
+  {
+   "id": "pass2.checkpoint_roundtrip",
+   "category": "execution",
+   "description": "a checkpoint round-trips its tensor payload and its seed",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "seed": 7,
+    "epoch": 2,
+    "content_matches": true
+   }
+  },
+  {
+   "id": "pass2.cohort_loader",
+   "category": "execution",
+   "description": "the cohort reader accepts a conforming file and rejects a malformed one",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "fields": 20,
+    "accepted": true,
+    "rejected_malformed": true
+   }
+  },
+  {
+   "id": "pass2.single_batch_overfit",
+   "category": "execution",
+   "description": "the objective falls on one fixed batch under repeated steps",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "first_objective": 4.076875,
+    "last_objective": 0.800008,
+    "steps": 60
+   }
+  },
+  {
+   "id": "pass2.minimal_training_loop",
+   "category": "execution",
+   "description": "a two-epoch loop completes and names a best epoch",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "epochs_run": 2,
+    "best_epoch": 2,
+    "band_accuracy": 0.604651
+   }
+  },
+  {
+   "id": "algo.tool_inventory",
+   "category": "algorithm",
+   "description": "the agent exposes the ten tools the manuscript names",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "tools": [
+     "LOCALISE",
+     "ATTENUATION",
+     "HARMONISE",
+     "TEXTURE",
+     "STABILITYFILTER",
+     "DENSITYESTIMATE",
+     "GROUNDTOSTANDARD",
+     "SCORE",
+     "CONSTRAIN",
+     "SERIALISE"
+    ]
+   }
+  },
+  {
+   "id": "algo.repair_order",
+   "category": "algorithm",
+   "description": "the loop repairs in the fixed order band, tier, severity, evidence",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "sequence": [
+     "sev",
+     "ev"
+    ],
+    "band": "normal",
+    "tier": "low",
+    "severity": 2
+   }
+  },
+  {
+   "id": "algo.repair_budget",
+   "category": "algorithm",
+   "description": "the loop stops at the budget and flags the residue as exhausted",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "repairs_at_zero": 0,
+    "repairs_at_six": 2,
+    "exhausted": true
+   }
+  },
+  {
+   "id": "algo.termination_reasons",
+   "category": "algorithm",
+   "description": "every termination route carries a documented reason string",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "reasons": [
+     "no_assessable_vertebra",
+     "unresolved_identifier",
+     "band",
+     "tier",
+     "sev",
+     "ev",
+     "budget_exhausted"
+    ],
+    "route": "unresolved_identifier"
+   }
+  },
+  {
+   "id": "algo.identity_resolution",
+   "category": "algorithm",
+   "description": "an unresolvable token is repaired when a registered alias exists",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "before": [
+     "osteoct-3003"
+    ],
+    "after": [
+     "OSTEOCT-3003"
+    ]
+   }
+  },
+  {
+   "id": "algo.conformance_definition",
+   "category": "algorithm",
+   "description": "conformance sums the weights of the active satisfied families over all five",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": 0.88,
+    "manual": 0.88,
+    "ceiling": 0.88
+   }
+  },
+  {
+   "id": "algo.family_removal_lowers_conformance",
+   "category": "algorithm",
+   "description": "removing any active family can only lower the conformance ceiling",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "ceilings": {
+     "id": 0.7,
+     "band": 0.72,
+     "tier": 0.8,
+     "sev": 0.9,
+     "ev": 0.88
+    }
+   }
+  },
+  {
+   "id": "algo.owl2_el_profile",
+   "category": "algorithm",
+   "description": "the profile check accepts an EL expression and rejects the three constructors Table I names",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "accepted_el": true,
+    "rejected": [
+     "cardinality",
+     "negation",
+     "universal"
+    ],
+    "el_constructors": [
+     "atom",
+     "conjunction",
+     "existential",
+     "role_hierarchy"
+    ]
+   }
+  },
+  {
+   "id": "algo.tool_call_accounting",
+   "category": "algorithm",
+   "description": "the registry counts every tool the pipeline touches and reports the error path",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "inventory": [
+     "LOCALISE",
+     "ATTENUATION",
+     "HARMONISE",
+     "TEXTURE",
+     "STABILITYFILTER",
+     "DENSITYESTIMATE",
+     "GROUNDTOSTANDARD",
+     "SCORE",
+     "CONSTRAIN",
+     "SERIALISE"
+    ],
+    "calls": {
+     "ATTENUATION": 2,
+     "CONSTRAIN": 2,
+     "DENSITYESTIMATE": 2,
+     "GROUNDTOSTANDARD": 2,
+     "HARMONISE": 2,
+     "LOCALISE": 2,
+     "SCORE": 2,
+     "SERIALISE": 2,
+     "STABILITYFILTER": 2,
+     "TEXTURE": 2
+    },
+    "total_calls": 20,
+    "error_paths": {}
+   }
+  },
+  {
+   "id": "att.harmonisation_recovery",
+   "category": "measurement",
+   "description": "harmonisation recovers the latent attenuation from the acquisition-biased measurement",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "records": 60,
+    "mean_absolute_error_hu": 2.5368,
+    "max_absolute_error_hu": 2.802,
+    "mean_raw_gap_hu": 5.6188
+   }
+  },
+  {
+   "id": "att.interval_straddle",
+   "category": "measurement",
+   "description": "an interval that crosses a threshold yields more than one compatible band",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "on_threshold_bands": [
+     "normal",
+     "osteopenia"
+    ],
+    "inside_band": [
+     "normal"
+    ],
+    "reference_on_threshold": [
+     "normal",
+     "osteopenia"
+    ],
+    "reference_inside": [
+     "normal"
+    ]
+   }
+  },
+  {
+   "id": "att.cross_scanner_spread",
+   "category": "measurement",
+   "description": "harmonisation narrows the spread of the same latent attenuation across scanners",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "raw_spread_hu": 55.32,
+    "harmonised_spread_hu": 0.0,
+    "scanners": 4
+   }
+  },
+  {
+   "id": "texture.glcm_contrast",
+   "category": "measurement",
+   "description": "the co-occurrence contrast reproduces a brute-force count on a hand-built matrix",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": 1.0,
+    "reference": 1.0,
+    "levels": 2
+   }
+  },
+  {
+   "id": "texture.run_length",
+   "category": "measurement",
+   "description": "the run-length matrix matches a brute-force run enumeration",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed_runs": 36,
+    "reference_runs": 36,
+    "features": [
+     "rlm_sre",
+     "rlm_lre",
+     "rlm_gln",
+     "rlm_rln",
+     "rlm_rp"
+    ]
+   }
+  },
+  {
+   "id": "texture.wavelet_energy",
+   "category": "measurement",
+   "description": "the Haar step reproduces the closed-form detail and approximation energies",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "levels": [
+     "hh_1",
+     "hl_1",
+     "lh_1",
+     "ll_1"
+    ],
+    "reference_low_energy": 15.0,
+    "manual_low_energy": 15.0,
+    "reference_high_energy": 3.0
+   }
+  },
+  {
+   "id": "texture.local_binary_pattern",
+   "category": "measurement",
+   "description": "the pattern statistics reproduce a brute-force popcount over the neighbourhood",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed_mean_popcount": 7.0,
+    "reference_mean_popcount": 7.0,
+    "width": 5
+   }
+  },
+  {
+   "id": "texture.stability_icc",
+   "category": "measurement",
+   "description": "the test-retest agreement reproduces the definition-based intraclass correlation",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed_icc": 0.997486,
+    "reference_icc": 0.997486,
+    "retained": [
+     "a",
+     "b"
+    ],
+    "dropped": []
+   }
+  },
+  {
+   "id": "morphometry.height_loss",
+   "category": "measurement",
+   "description": "the measured height loss tracks the constructed reduction and grades with it",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "records": 40,
+    "grade_agreement": 40,
+    "grade_histogram": {
+     "0": 11,
+     "1": 7,
+     "2": 21,
+     "3": 1
+    }
+   }
+  },
+  {
+   "id": "metric.auc",
+   "category": "metric",
+   "description": "the area under the curve reproduces pairwise counting",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": 0.81424825,
+    "reference": 0.81424825,
+    "positives": 52
+   }
+  },
+  {
+   "id": "metric.sensitivity_at_specificity",
+   "category": "metric",
+   "description": "the operating point reproduces an exhaustive threshold sweep",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": 0.53846154,
+    "reference": 0.53846154,
+    "threshold": 3.669512
+   }
+  },
+  {
+   "id": "metric.concordance_index",
+   "category": "metric",
+   "description": "the concordance reproduces pair enumeration with the same censoring rule",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": 0.89012739,
+    "reference": 0.89012739,
+    "events": 45
+   }
+  },
+  {
+   "id": "metric.treatment_aware_censoring",
+   "category": "metric",
+   "description": "a treatment switch censors the follow-up at the switch",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "effective_times": [
+     100.0,
+     150.0,
+     300.0,
+     400.0
+    ],
+    "effective_events": [
+     true,
+     false,
+     true,
+     true
+    ]
+   }
+  },
+  {
+   "id": "metric.net_benefit",
+   "category": "metric",
+   "description": "net benefit reproduces the closed form at the manuscript's decision thresholds",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": 0.13035714,
+    "reference": 0.13035714,
+    "treat_all": 0.19642857,
+    "treat_all_closed_form": 0.19642857
+   }
+  },
+  {
+   "id": "metric.reclassification",
+   "category": "metric",
+   "description": "the reclassification improvement reproduces the four-cell count",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "nri": 0.0,
+    "event_share": 1.0,
+    "non_event_share": -1.0,
+    "cut": 0.2,
+    "events_up_manual": 7.0,
+    "non_events_down_manual": 0.0
+   }
+  },
+  {
+   "id": "metric.calibration_slope",
+   "category": "metric",
+   "description": "the calibration slope agrees with an independent logistic fit",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed_slope": 1.013353,
+    "independent_slope": 1.013353,
+    "observed_intercept": 0.218083,
+    "converged": true
+   }
+  },
+  {
+   "id": "metric.delong_variance",
+   "category": "metric",
+   "description": "the DeLong standard error agrees with a patient-level bootstrap spread",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "delong_standard_error": 0.038854,
+    "bootstrap_standard_error": 0.039498,
+    "auc": 0.814248
+   }
+  },
+  {
+   "id": "metric.paired_delong",
+   "category": "metric",
+   "description": "the paired comparison of two scores reports the difference and its spread",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "first": 0.814248,
+    "second": 0.821897,
+    "difference_spread": 0.019012
+   }
+  },
+  {
+   "id": "statistic.holm_step_down",
+   "category": "statistic",
+   "description": "the step-down reproduces the definition-based adjusted values",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": [
+     0.006,
+     0.04,
+     0.156,
+     0.156,
+     0.62,
+     0.62
+    ],
+    "reference": [
+     0.006,
+     0.04,
+     0.156,
+     0.156,
+     0.62,
+     0.62
+    ]
+   }
+  },
+  {
+   "id": "statistic.cohen_kappa",
+   "category": "statistic",
+   "description": "the chance-corrected agreement reproduces a brute-force contingency table",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "observed": 0.35734561,
+    "reference": 0.35734561,
+    "ratings": 220
+   }
+  },
+  {
+   "id": "statistic.patient_clusters",
+   "category": "statistic",
+   "description": "the cluster bootstrap groups examinations by patient",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "clusters": 3,
+    "sizes": [
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "statistic.bootstrap_determinism",
+   "category": "statistic",
+   "description": "two bootstrap runs with the same seed agree exactly",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "first": [
+     0.69666667,
+     0.75333333
+    ],
+    "other_seed": [
+     0.69833333,
+     0.755
+    ]
+   }
+  },
+  {
+   "id": "statistic.permutation",
+   "category": "statistic",
+   "description": "the permutation test returns a p-value in the closed unit interval",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "p_value": 0.004975,
+    "replicates": 200,
+    "bounded": true
+   }
+  },
+  {
+   "id": "serialisation.tree",
+   "category": "serialisation",
+   "description": "the content tree carries the leaf inventory and a stable digest",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "leaves": 40,
+    "lines": 41,
+    "digest": "771063f3ea5d66d3"
+   }
+  },
+  {
+   "id": "serialisation.round_trip",
+   "category": "serialisation",
+   "description": "the same record serialises to the same digest",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "digest_stable": true,
+    "characters": 4059
+   }
+  },
+  {
+   "id": "serialisation.part10_encoding",
+   "category": "serialisation",
+   "description": "a Part-10 byte stream can be written when pydicom is available",
+   "status": "BLOCKED",
+   "detail": "pydicom is not installed on this verification host, so only the content tree is exercised",
+   "evidence": {}
+  },
+  {
+   "id": "env.dataset_links",
+   "category": "environment",
+   "description": "every external link in the dataset list answers and names its resource",
+   "status": "NOT_RUN",
+   "detail": "the live probe is opt-in; run the verifier with --probe-live to exercise it",
+   "evidence": {
+    "probed_live": false,
+    "attempts_per_link": 3,
+    "addresses_tried": [
+     "github.com",
+     "zenodo.org",
+     "osf.io",
+     "browser.ihtsdotools.org",
+     "dicom.nema.org"
+    ],
+    "links_recorded": 9
+   }
+  },
+  {
+   "id": "gate.pre_specified_conformance",
+   "category": "gating",
+   "description": "the pre-specified conformance floor is reported against the measured value",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "criterion": 0.9,
+    "observed": 1.0,
+    "met": true,
+    "partition": "internal_test",
+    "source": "cohort fixture"
+   }
+  },
+  {
+   "id": "gate.severity_gain_against_mcid",
+   "category": "gating",
+   "description": "the severity-family concordance change is reported against the pre-specified minimum important difference",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "change": -0.014493,
+    "mcid": 0.03,
+    "exceeds_mcid": false
+   }
+  },
+  {
+   "id": "gate.comparison_margins",
+   "category": "gating",
+   "description": "the comparison margins the manuscript pre-specified are recorded with the observed gaps",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "utility_margin_points": 5.0,
+    "conformance_margin_points": 15.0,
+    "observed_auroc_gap_points": 34.158416,
+    "observed_conformance_gap_points": 30.00381
+   }
+  },
+  {
+   "id": "gate.conformance_monotone",
+   "category": "gating",
+   "description": "every family removal lowers the reported conformance on the fixture",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "monotone": true,
+    "per_family": {
+     "identity": true,
+     "band": true,
+     "tier": true,
+     "severity": true,
+     "evidence": true
+    }
+   }
+  },
+  {
+   "id": "gate.findings",
+   "category": "gating",
+   "description": "the two named findings are reported with their supporting quantities",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "findings": [
+     {
+      "id": "finding_1_unordered_axes",
+      "statement": "For a decision layer constrained by an ontology of clinical standards, the pair consisting of agreement with the reference assessment and conformance with the encoded standard admits no monotone order: adding an axiom can raise conformance while lowering agreement.",
+      "holds": true,
+      "evidence": {
+       "conformance_monotone_under_removal": true,
+       "utility_increases_without_a_family": true,
+       "agreement_and_conformance_move_in_opposite_directions": false,
+       "reference_auroc": 0.8911,
+       "reference_c_index": 0.5827,
+       "reference_conformance": 1.0
+      }
+     },
+     {
+      "id": "finding_2_dissociation",
+      "statement": "Deformity and densitometric status dissociate, and the dissociation carries prognostic weight: a stratum of patients graded at or above the moderate deformity floor is densitometrically normal or osteopenic, and that stratum carries a higher five-year incidence of major osteoporotic fracture than densitometrically normal patients without deformity.",
+      "holds": true,
+      "evidence": {
+       "patients": 234,
+       "deformed_patients": 114,
+       "deformed_and_densitometrically_normal": 110,
+       "dissociated_share": 0.9649,
+       "incidence_deformed_normal_density": 0.6,
+       "incidence_normal_without_deformity": 0.1842,
+       "incidence_ratio": 3.2571,
+       "missed_by_density_only_rule": 110
+      }
+     }
+    ],
+    "count": 2
+   }
+  },
+  {
+   "id": "ms.trial_flow_arithmetic",
+   "category": "manuscript",
+   "description": "the exclusion categories sum to the reported exclusion count and the analysis set follows",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "exclusions": 5334,
+    "reported_exclusions": 5334,
+    "analysis_set": 21905,
+    "reported_analysis_set": 21905
+   }
+  },
+  {
+   "id": "ms.table3_auroc_delta",
+   "category": "manuscript",
+   "description": "the printed AUROC change column equals the full-system value minus the family value",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "rows": 9,
+    "convention": "full minus variant"
+   }
+  },
+  {
+   "id": "ms.table3_conformance_delta",
+   "category": "manuscript",
+   "description": "the printed conformance change column equals the family value minus the full-system value",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "rows": 9,
+    "convention": "variant minus full"
+   }
+  },
+  {
+   "id": "ms.severity_concordance_gain",
+   "category": "manuscript",
+   "description": "the severity-family concordance change is the tabulated difference and it is below the pre-specified difference",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "change": 0.025,
+    "minimum_important_difference": 0.03,
+    "below_threshold": true
+   }
+  },
+  {
+   "id": "ms.dissociation_incidence_ratio",
+   "category": "manuscript",
+   "description": "the printed incidence ratio follows from the two printed five-year incidences",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "incidence_deformed": 0.119,
+    "incidence_reference": 0.042,
+    "derived_ratio": 2.8333,
+    "printed_ratio": 2.8
+   }
+  },
+  {
+   "id": "ms.dissociation_share",
+   "category": "manuscript",
+   "description": "the printed dissociated share follows from the two printed patient counts",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "numerator": 84,
+    "denominator": 214,
+    "derived_share": 0.3925,
+    "printed_share": 0.393
+   }
+  },
+  {
+   "id": "ms.conformance_span",
+   "category": "manuscript",
+   "description": "the printed conformance span equals the printed drop for the operator-off configuration",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "derived_span": 0.214,
+    "printed_change": -0.214
+   }
+  },
+  {
+   "id": "ms.unsupported_and_abstention_direction",
+   "category": "manuscript",
+   "description": "the constrained configuration lowers the unsupported-code rate and raises the abstention rate",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "unsupported": [
+     0.058,
+     0.004
+    ],
+    "abstention": [
+     0.012,
+     0.037
+    ]
+   }
+  },
+  {
+   "id": "ms.conformance_ordering",
+   "category": "manuscript",
+   "description": "the conformance weights are ordered as the printed conformance drops are",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "printed_drops": [
+     0.087,
+     0.056,
+     0.047,
+     0.035,
+     0.022
+    ],
+    "weights": [
+     0.3,
+     0.28,
+     0.2,
+     0.12,
+     0.1
+    ]
+   }
+  },
+  {
+   "id": "ms.reader_study_arithmetic",
+   "category": "manuscript",
+   "description": "the reading study is four readers over a fixed case pool and reports both agreement and reading time",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "readers": 4,
+    "cases": 400,
+    "kappa": 0.71,
+    "time_before": 84.0,
+    "time_after": 61.0
+   }
+  },
+  {
+   "id": "ms.table4_distinct_intervals",
+   "category": "manuscript",
+   "description": "two different configurations in the clinical table cannot share one interval",
+   "status": "FAIL",
+   "detail": "these rows report an identical concordance with an identical interval: 3-D shifted-window transformer and Tool-using agent, no ontology layer; the two configurations differ elsewhere in the manuscript, so the duplication is left standing rather than reconciled",
+   "evidence": {}
+  },
+  {
+   "id": "fig2.cumulative_axiom_curve",
+   "category": "algorithm",
+   "description": "conformance rises monotonically as the axiom families are added in the published order",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "points": [
+     {
+      "label": "none",
+      "active_families": [],
+      "auroc": 0.5495,
+      "c_index": 0.6414,
+      "conformance": 0.0
+     },
+     {
+      "label": "identity",
+      "active_families": [
+       "id"
+      ],
+      "auroc": 0.5495,
+      "c_index": 0.6414,
+      "conformance": 0.3
+     },
+     {
+      "label": "band",
+      "active_families": [
+       "id",
+       "band"
+      ],
+      "auroc": 0.9406,
+      "c_index": 0.5666,
+      "conformance": 0.58
+     },
+     {
+      "label": "tier",
+      "active_families": [
+       "id",
+       "band",
+       "tier"
+      ],
+      "auroc": 0.9431,
+      "c_index": 0.5683,
+      "conformance": 0.78
+     },
+     {
+      "label": "severity",
+      "active_families": [
+       "id",
+       "band",
+       "tier",
+       "sev"
+      ],
+      "auroc": 0.8911,
+      "c_index": 0.5827,
+      "conformance": 0.88
+     },
+     {
+      "label": "evidence",
+      "active_families": [
+       "id",
+       "band",
+       "tier",
+       "sev",
+       "ev"
+      ],
+      "auroc": 0.8911,
+      "c_index": 0.5827,
+      "conformance": 1.0
+     }
+    ],
+    "conformance_monotone": true,
+    "utility_monotone": false,
+    "utility_dips": [
+     "band"
+    ]
+   }
+  },
+  {
+   "id": "fig2.per_examination_budget",
+   "category": "algorithm",
+   "description": "one examination is processed within the reported batch-operation budget",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "records": 4,
+    "budget_seconds_per_examination": 5.0,
+    "within_budget": true,
+    "tool_calls": 40
+   }
+  },
+  {
+   "id": "env.ruff",
+   "category": "environment",
+   "description": "ruff reports no findings",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "gate": "ruff",
+    "exit_code": 0
+   }
+  },
+  {
+   "id": "env.black",
+   "category": "environment",
+   "description": "black reports no formatting differences",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "gate": "black",
+    "exit_code": 0
+   }
+  },
+  {
+   "id": "env.isort",
+   "category": "environment",
+   "description": "isort reports no import-order differences",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "gate": "isort",
+    "exit_code": 0
+   }
+  },
+  {
+   "id": "env.mypy",
+   "category": "environment",
+   "description": "mypy --strict reports no errors under src/osteoct",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "gate": "mypy",
+    "exit_code": 0
+   }
+  },
+  {
+   "id": "env.pytest",
+   "category": "environment",
+   "description": "the test suite passes",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "gate": "pytest",
+    "exit_code": 0
+   }
+  },
+  {
+   "id": "env.docker_build",
+   "category": "environment",
+   "description": "a container image builds from the shipped Dockerfile",
+   "status": "BLOCKED",
+   "detail": "no container runtime is available on this verification host",
+   "evidence": {}
+  },
+  {
+   "id": "hygiene.markdown_inventory",
+   "category": "hygiene",
+   "description": "the only markdown kept is the repository README",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "markdown": [
+     "README.md"
+    ]
+   }
+  },
+  {
+   "id": "hygiene.readme_sections",
+   "category": "hygiene",
+   "description": "the README carries no code-availability, citation or checkpoint section",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "characters": 15559,
+    "headings": 11
+   }
+  },
+  {
+   "id": "hygiene.absolute_paths",
+   "category": "hygiene",
+   "description": "no shipped text file carries an absolute host path",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "scanned_suffixes": [
+     ".cfg",
+     ".ini",
+     ".json",
+     ".md",
+     ".py",
+     ".sh",
+     ".toml",
+     ".txt",
+     ".yaml",
+     ".yml"
+    ]
+   }
+  },
+  {
+   "id": "hygiene.emoji",
+   "category": "hygiene",
+   "description": "no shipped text file carries an emoji",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "scanned_suffixes": 10
+   }
+  },
+  {
+   "id": "hygiene.framing_phrases",
+   "category": "hygiene",
+   "description": "no shipped file carries a reproduction, generation or AI-writing marker",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "patterns": 16,
+    "excluded_self": true
+   }
+  },
+  {
+   "id": "hygiene.data_vocabulary",
+   "category": "hygiene",
+   "description": "no shipped file describes the stand-in cohort with forbidden vocabulary",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "patterns": 5,
+    "excluded_self": true
+   }
+  },
+  {
+   "id": "hygiene.gitignore_anchoring",
+   "category": "hygiene",
+   "description": "every artefact root is anchored and no unanchored rule shadows a shipped directory",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "rules": 15,
+    "anchored": [
+     ".ipynb_checkpoints",
+     ".mypy_cache",
+     ".pytest_cache",
+     ".ruff_cache",
+     ".venv",
+     "artifacts",
+     "checkpoints",
+     "cohort",
+     "cohort/derived",
+     "cohort/raw",
+     "runs",
+     "runs_smoke",
+     "venv"
+    ]
+   }
+  },
+  {
+   "id": "hygiene.dataset_links",
+   "category": "hygiene",
+   "description": "the dataset link list carries only absolute https links",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "links": 9,
+    "https_only": true
+   }
+  },
+  {
+   "id": "hygiene.root_artefacts",
+   "category": "hygiene",
+   "description": "the four root artefacts are present",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "present": {
+     "claim_to_code.json": true,
+     "verification_report.json": true,
+     "integrity_manifest.json": true,
+     "dataset_urls.txt": true
+    }
+   }
+  },
+  {
+   "id": "hygiene.third_party_notice",
+   "category": "hygiene",
+   "description": "the third-party notice names the datasets and their access terms",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "characters": 4361,
+    "licence_file": true
+   }
+  },
+  {
+   "id": "artefact.report_present",
+   "category": "artefact",
+   "description": "the verification report is present and parses",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "bytes": 32880
+   }
+  },
+  {
+   "id": "artefact.report_completeness",
+   "category": "artefact",
+   "description": "the shipped report carries every check and both statuses",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "checks": 86,
+    "categories": [
+     "algorithm",
+     "artefact",
+     "environment",
+     "execution",
+     "gating",
+     "hygiene",
+     "manuscript",
+     "measurement",
+     "metric",
+     "provenance",
+     "serialisation",
+     "statistic"
+    ],
+    "overall_status": "UNVERIFIED"
+   }
+  },
+  {
+   "id": "artefact.manifest_consistency",
+   "category": "artefact",
+   "description": "the manifest covers the live tree and excludes only itself",
+   "status": "PASS",
+   "detail": "",
+   "evidence": {
+    "listed": 143,
+    "live": 143,
+    "stale": [],
+    "unlisted": []
+   }
+  }
+ ],
+ "interpretation": "PASS means the check ran on this host and held. FAIL means it ran and did not hold. NOT_RUN means the input it needs is unavailable, which for a private clinical cohort is the expected outcome and is never an invitation to substitute a number. BLOCKED means an external resource or tool is required and is not present in this checkout. overall_status covers every check; code_status covers the same set without the manuscript-arithmetic family, so a discrepancy inside the manuscript's own tables is not confused with a defect in this release. All cohort-level quantities come from the schema-compatible cohort fixture, not from the study cohort."
+}

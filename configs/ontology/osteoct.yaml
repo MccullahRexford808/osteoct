@@ -1,0 +1,39 @@
+calibration:
+  reference_mean_hu: 240.0
+  reference_sd_hu: 45.0
+  within_scan_floor_hu: 1.5
+
+genant:
+  fracture_floor: 0.20
+  moderate_floor: 0.25
+  severe_floor: 0.40
+
+envelope:
+  maximum_slice_thickness_mm: 2.5
+  minimum_tube_voltage_kvp: 80.0
+  accepted_kernels:
+    - B30f
+    - B40f
+    - B50f
+    - STANDARD
+    - BONE
+    - DETAIL
+    - FC30
+    - FC50
+    - I30f
+    - Br40d
+    - Br60d
+    - Qr40d
+
+active_families:
+  - id
+  - band
+  - tier
+  - sev
+  - ev
+
+concept_systems:
+  - SNOMED CT
+  - RadLex
+  - LOINC
+  - DICOM SR

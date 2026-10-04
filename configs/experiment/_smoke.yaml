@@ -1,0 +1,35 @@
+# for unit-test smoke only; do not use for reporting
+
+defaults:
+  - ontology: osteoct
+  - acquisition: harmonisation
+  - cohort: fixture
+  - pipeline: agent
+  - model: scorer
+  - train: default
+
+arm: constrained
+
+cohort:
+  examinations_per_site: 8
+  bodies: 6
+  slices_per_body: 6
+  slice_gap: 2
+
+train:
+  seeds:
+    - 0
+    - 1
+  epochs: 2
+  batch_size: 4
+  grad_accum: 1
+  validation_fraction: 0.25
+  early_stopping_patience: 2
+  schedule:
+    warmup_steps: 2
+    total_steps: 8
+
+pipeline:
+  constrain_budget: 4
+  bootstrap_replicates: 40
+  reading_study_size: 24

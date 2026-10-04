@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "osteoct"
+version = "1.0.0"
+description = "Ontology-guided opportunistic CT agent for bone-health decisions grounded in vertebral attenuation, trabecular texture and fracture-risk semantics"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {file = "LICENSE"}
+dependencies = [
+  "numpy==2.4.3",
+  "scipy==1.17.1",
+  "scikit-learn==1.8.0",
+  "PyYAML==6.0.3",
+  "torch==2.11.0",
+]
+
+[project.optional-dependencies]
+sr = ["pydicom>=3.0"]
+dev = [
+  "pytest==9.0.3",
+  "ruff",
+  "mypy",
+  "black",
+  "isort",
+]
+
+[project.scripts]
+osteoct-train = "osteoct.cli.train:main"
+osteoct-evaluate = "osteoct.cli.evaluate:main"
+osteoct-agent = "osteoct.cli.agent:main"
+osteoct-verify = "osteoct.cli.verify:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 132
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "UP", "B", "SIM", "RET", "PTH"]
+ignore = ["E501", "B905", "SIM108", "UP042"]
+
+[tool.black]
+line-length = 132
+target-version = ["py311"]
+
+[tool.isort]
+profile = "black"
+line_length = 132
+combine_as_imports = true
+force_sort_within_sections = false
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+warn_unused_ignores = false
+exclude = ["tests", "scripts"]
+files = ["src/osteoct"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+pythonpath = ["src"]
+markers = ["slow: exercises a full training loop on the smoke configuration"]
+filterwarnings = ["ignore::DeprecationWarning"]
